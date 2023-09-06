@@ -57,15 +57,29 @@
         </div>
 
         <div class="mb-3 text-start">
-          <label class="form-label">Registered By</label>
-          <select class="form-select" id="registeredById" formControlName="registeredById">
-            <option value="">Select a user</option>
-            <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
-          </select>
-          <span class="form-text text-danger" *ngIf="isFieldInvalid('registeredById')">
-            registeredById is required
+          <ng-container *ngIf="!isUpdating">
+            <label class="form-label">Registered By</label>
+            <select class="form-select" id="registeredById" formControlName="registeredById">
+              <option value="">Select a user</option>
+              <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
+            </select>
+          </ng-container>
+          <ng-container *ngIf="isUpdating">
+            <label class="form-label">Edited By</label>
+            <select class="form-select" id="editedById" formControlName="editedById">
+              <option value="">Select a user</option>
+              <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
+            </select>
+          </ng-container>
+          <span
+            class="form-text text-danger"
+            *ngIf="isFieldInvalid(isUpdating ? 'editedById' : 'registeredById')"
+          >
+            {{ isUpdating ? 'Edited By' : 'Registered By' }} is required
           </span>
         </div>
+
+
 
 
 

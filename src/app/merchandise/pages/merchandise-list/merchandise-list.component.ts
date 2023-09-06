@@ -25,6 +25,7 @@ export class MerchandiseListComponent implements AfterViewInit, OnInit {
   searchControl: FormControl = new FormControl();
   isLoading: boolean = false;
   errorRequest: string | null = null;
+  maxDate: Date;
 
   filterOptions: FilterOptions = {
     page: 0,
@@ -41,8 +42,9 @@ export class MerchandiseListComponent implements AfterViewInit, OnInit {
     private snackBar: MatSnackBar,
     private datePipe: DatePipe
 
-
-  ) {}
+  ) {
+    this.maxDate = new Date();
+  }
 
 
   ngOnInit(): void {

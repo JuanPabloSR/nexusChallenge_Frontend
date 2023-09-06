@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FilterOptions } from 'src/app/interfaces/filter-options-interface';
+import { MerchandiseEdit } from 'src/app/interfaces/merchandise-create-interface';
 import { Content, MerchandiseReponse } from 'src/app/interfaces/merchandise-response-interface';
 import { environment } from 'src/environments/environment.prod';
 
@@ -29,9 +30,15 @@ export class MerchandiseService {
     return this.http.get(`${BASE_URL}/merchandise/${merchandiseId}`);
   }
 
-
   createMerchandise(merchandiseData: Content): Observable<any> {
     return this.http.post(`${BASE_URL}/merchandise`, merchandiseData);
+  }
+
+  updateMerchandise(
+    merchandiseId: number,
+    merchandise: MerchandiseEdit
+  ): Observable<any> {
+    return this.http.put(`${BASE_URL}/merchandise/${merchandiseId}`, merchandise);
   }
 
 }
