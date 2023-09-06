@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from '../shared/components/toolbar/toolbar.component';
 import { FooterComponent } from '../shared/components/footer/footer.component';
 import { DialogDeleteComponent } from './components/dialog-delete/dialog-delete.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { DialogDeleteComponent } from './components/dialog-delete/dialog-delete.
     FormsModule,
     ReactiveFormsModule,
     MerchandiseRoutingModule,
-
+    HttpClientModule,
+    RouterTestingModule,
   ],
   providers: [DatePipe]
 })

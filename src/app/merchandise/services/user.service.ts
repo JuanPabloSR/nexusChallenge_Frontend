@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Content } from 'src/app/interfaces/merchandise-response-interface';
 import { UserReponse } from 'src/app/interfaces/user-response-interface';
 import { environment } from 'src/environments/environment.prod';
 
