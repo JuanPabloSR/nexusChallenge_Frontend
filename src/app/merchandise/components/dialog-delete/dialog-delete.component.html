@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Eliminate merchandise</h2>
+<mat-dialog-content>
+  <p>Are you sure you want to remove this merchandise?</p>
+  <strong>Only the user who created the merchandise can delete it.</strong>
+  <br>
+  <label class="form-label">Registered By</label>
+  <select class="form-select" id="registeredById" [(ngModel)]="selectedUser">
+    <option value="">Select a user</option>
+    <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
+  </select>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onConfirm()" [disabled]="selectedUser === null">Confirm</button>
+</mat-dialog-actions>

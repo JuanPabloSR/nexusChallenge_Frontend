@@ -1,8 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { FilterOptions } from 'src/app/interfaces/filter-options-interface';
-import { MerchandiseEdit } from 'src/app/interfaces/merchandise-create-interface';
+import {  MerchandiseEdit } from 'src/app/interfaces/merchandise-create-interface';
 import { Content, MerchandiseReponse } from 'src/app/interfaces/merchandise-response-interface';
 import { environment } from 'src/environments/environment.prod';
 
@@ -40,5 +40,19 @@ export class MerchandiseService {
   ): Observable<any> {
     return this.http.put(`${BASE_URL}/merchandise/${merchandiseId}`, merchandise);
   }
+
+  deleteMerchandise(merchandiseId: number, userId: number): Observable<number> {
+    const url = `${BASE_URL}/merchandise/${merchandiseId}`;
+    const requestBody = { userId: userId };
+
+    return this.http.request('delete', url, { body: requestBody, observe: 'response' }).pipe(
+      map(response => response.status)
+    );
+  }
+
+
+
+
+
 
 }

@@ -99,6 +99,8 @@ export class MerchandiseListComponent implements AfterViewInit, OnInit {
   }
 
 
+
+
   onPageChange(event: any) {
     this.paginator.pageIndex = event.pageIndex ;
     this.filterOptions.page = event.pageIndex ;

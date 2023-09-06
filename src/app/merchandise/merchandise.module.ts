@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from '../shared/components/toolbar/toolbar.component';
 import { FooterComponent } from '../shared/components/footer/footer.component';
+import { DialogDeleteComponent } from './components/dialog-delete/dialog-delete.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FooterComponent } from '../shared/components/footer/footer.component';
     MerchandiseItemComponent,
     MerchandiseListComponent,
     ToolbarComponent,
-    FooterComponent
+    FooterComponent,
+    DialogDeleteComponent
   ],
   imports: [
     CommonModule,

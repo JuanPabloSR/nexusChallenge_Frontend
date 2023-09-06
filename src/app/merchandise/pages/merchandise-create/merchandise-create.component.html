@@ -1,4 +1,5 @@
-<div class="container">
+<app-toolbar [showBackButton]="true"></app-toolbar>
+<div class="container page-container">
   <div class="row justify-content-center animate__animated animate__fadeIn">
     <div class="col-lg-4 col-md-6 col-sm-8">
       <h1 class="text-center mt-5 mb-3">
@@ -59,33 +60,37 @@
         <div class="mb-3 text-start">
           <ng-container *ngIf="!isUpdating">
             <label class="form-label">Registered By</label>
-            <select class="form-select" id="registeredById" formControlName="registeredById">
+            <select
+              class="form-select"
+              id="registeredById"
+              formControlName="registeredById"
+            >
               <option value="">Select a user</option>
-              <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
+              <option *ngFor="let user of users" [ngValue]="user.id">
+                {{ user.name }}
+              </option>
             </select>
           </ng-container>
           <ng-container *ngIf="isUpdating">
             <label class="form-label">Edited By</label>
-            <select class="form-select" id="editedById" formControlName="editedById">
+            <select
+              class="form-select"
+              id="editedById"
+              formControlName="editedById"
+            >
               <option value="">Select a user</option>
-              <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
+              <option *ngFor="let user of users" [ngValue]="user.id">
+                {{ user.name }}
+              </option>
             </select>
           </ng-container>
           <span
             class="form-text text-danger"
             *ngIf="isFieldInvalid(isUpdating ? 'editedById' : 'registeredById')"
           >
-            {{ isUpdating ? 'Edited By' : 'Registered By' }} is required
+            {{ isUpdating ? "Edited By" : "Registered By" }} is required
           </span>
         </div>
-
-
-
-
-
-
-
-        <!-- Add more form fields for merchandise as needed -->
 
         <div class="mb-3">
           <button
@@ -102,3 +107,5 @@
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

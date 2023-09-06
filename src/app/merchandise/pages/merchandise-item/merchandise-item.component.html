@@ -1,7 +1,7 @@
 <app-toolbar [showBackButton]="true"></app-toolbar>
 <body>
   <div
-    class="container card-custom mt-5 animate__animated animate__fadeIn justify-content-center align-items-center col-lg-4 col-md-8 col-sm-8"
+    class="page-container container card-custom mt-5 animate__animated animate__fadeIn justify-content-center align-items-center col-lg-4 col-md-8 col-sm-8"
   >
     <div class="card card-body-custom text-center" *ngIf="merchandise">
       <div class="container-custom"></div>
@@ -52,12 +52,33 @@
             </div>
           </div>
 
-          <div class="d-grid gap-2 mt-5">
+          <div class="mt-5">
             <button
               class="custom-btn"
               mat-raised-button
               color="primary"
-              routerLink="/users/list"
+              routerLink="/merchandise/edit/{{ merchandise.id }}"
+              class="m-2"
+            >
+              Edit
+            </button>
+
+            <button
+              class="custom-btn"
+              mat-raised-button
+              color="primary"
+              (click)="openDeleteDialog()"
+              class="m-2"
+            >
+              Delete
+            </button>
+            <br>
+            <button
+              class="custom-btn"
+              mat-raised-button
+              color="primary"
+              routerLink="/merchandise/list"
+              class="m-2"
             >
               Back
             </button>
@@ -69,7 +90,11 @@
       </div>
     </div>
     <div class="not-found-container" *ngIf="!merchandise">
-      <img src="assets/404.png" alt="404 error" class="not-found-image img-fluid" />
+      <img
+        src="assets/404.png"
+        alt="404 error"
+        class="not-found-image img-fluid"
+      />
       <p class="not-found-text">ID not found</p>
       <button mat-raised-button color="primary" routerLink="/merchandise/list">
         Go Back
