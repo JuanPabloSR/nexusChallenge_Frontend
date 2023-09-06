@@ -1,1 +1,56 @@
-<p>merchandise-item works!</p>
+<!-- <app-toolbar [showBackButton]="true"></app-toolbar> -->
+<body>
+  <div
+    class="container card-custom mt-5 animate__animated animate__fadeIn justify-content-center align-items-center col-lg-4 col-md-8 col-sm-8"
+  >
+    <div class="card card-body-custom text-center" *ngIf="merchandise">
+      <div class="container-custom"></div>
+      <div class="user-icon-container">
+        <img src="assets/boxImage.png" alt="profile_image" class="card-img-top" />
+      </div>
+
+      <div class="card-title mt-5">
+        <h5 class="fs-2 fw-medium">
+          {{ merchandise.productName }}
+        </h5>
+        <h2>Quantity: {{ merchandise.quantity }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card-text">
+              <p><strong>Create By:</strong> {{ merchandise.registeredBy.name }}</p>
+              <p><strong>Position creator:</strong> {{ merchandise.registeredBy.position?.jobTitle }}</p>
+              <p><strong>Entry date:</strong> {{ merchandise.entryDate }}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-text">
+              <p><strong>Edit By:</strong> {{ merchandise.editedBy?.name || 'Not registered' }}</p>
+              <p><strong>Position editor:</strong> {{ merchandise.editedBy?.position?.jobTitle || 'Not registered' }}</p>
+              <p><strong>Edit date:</strong> {{ merchandise.editDate || 'Not registered' }}</p>
+
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 mt-5">
+            <button
+              class="custom-btn"
+              mat-raised-button
+              color="primary"
+              routerLink="/users/list"
+            >
+              Back
+            </button>
+          </div>
+        </div>
+        <div>
+          <mat-spinner *ngIf="isLoading"></mat-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<div>
+  <!-- <app-footer></app-footer> -->
+</div>
