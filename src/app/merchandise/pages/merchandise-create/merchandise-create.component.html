@@ -1,1 +1,90 @@
-<p>merchandise-create works!</p>
+<div class="container">
+  <div class="row justify-content-center animate__animated animate__fadeIn">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+      <h1 class="text-center mt-5 mb-3">
+        {{ isUpdating ? "Update Merchandise" : "Create Merchandise" }}
+      </h1>
+      <form [formGroup]="merchandiseForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3 text-start">
+          <label class="form-label">Product Name</label>
+          <input
+            class="form-control"
+            id="productName"
+            placeholder="Enter product name"
+            formControlName="productName"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="isFieldInvalid('productName')"
+          >
+            Product Name is required
+          </span>
+        </div>
+
+        <div class="mb-3 text-start">
+          <label class="form-label">Quantity</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantity"
+            placeholder="Enter quantity"
+            formControlName="quantity"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="isFieldInvalid('quantity')"
+          >
+            Quantity is required
+          </span>
+        </div>
+
+        <div class="mb-3 text-start">
+          <label class="form-label">Entry Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="entryDate"
+            placeholder="Enter entryDate"
+            formControlName="entryDate"
+            [max]="today"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="isFieldInvalid('entryDate')"
+          >
+            EntryDate is required
+          </span>
+        </div>
+
+        <div class="mb-3 text-start">
+          <label class="form-label">Registered By</label>
+          <select class="form-select" id="registeredById" formControlName="registeredById">
+            <option value="">Select a user</option>
+            <option *ngFor="let user of users" [ngValue]="user.id">{{ user.name }}</option>
+          </select>
+          <span class="form-text text-danger" *ngIf="isFieldInvalid('registeredById')">
+            registeredById is required
+          </span>
+        </div>
+
+
+
+
+
+        <!-- Add more form fields for merchandise as needed -->
+
+        <div class="mb-3">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            class="w-100"
+            [disabled]="merchandiseForm.invalid"
+          >
+            {{ isUpdating ? "Update Merchandise" : "Create Merchandise" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

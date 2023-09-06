@@ -44,6 +44,7 @@ export class MerchandiseListComponent implements AfterViewInit, OnInit {
 
   ) {}
 
+
   ngOnInit(): void {
     this.searchControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
@@ -52,7 +53,10 @@ export class MerchandiseListComponent implements AfterViewInit, OnInit {
         this.applyFilter();
       });
     this.loadMerchandise();
+
   }
+
+
 
   @ViewChild(MatSort) sort!: MatSort;
 
