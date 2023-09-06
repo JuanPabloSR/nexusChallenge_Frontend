@@ -3,12 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
   @Input() showBackButton: boolean = false;
   isSmallScreen: boolean = false;
-
 
   ngOnInit(): void {
     this.checkScreenSize();
@@ -22,5 +20,4 @@ export class ToolbarComponent implements OnInit {
   checkScreenSize(): void {
     this.isSmallScreen = window.innerWidth < 768;
   }
-
 }

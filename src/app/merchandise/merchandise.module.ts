@@ -30,7 +30,6 @@ import { RouterTestingModule } from '@angular/router/testing';
     ReactiveFormsModule,
     MerchandiseRoutingModule,
     HttpClientModule,
-    RouterTestingModule,
   ],
   providers: [DatePipe]
 })

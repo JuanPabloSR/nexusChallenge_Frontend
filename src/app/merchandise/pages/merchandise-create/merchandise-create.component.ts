@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MerchandiseService } from '../../services/merchandise.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,12 +7,11 @@ import { UserReponse } from 'src/app/interfaces/user-response-interface';
 import { UserService } from '../../services/user.service';
 import { DatePipe } from '@angular/common';
 import { MerchandiseEdit } from 'src/app/interfaces/merchandise-create-interface';
-import { Content, EdBy, MerchandiseReponse } from 'src/app/interfaces/merchandise-response-interface';
+import { Content } from 'src/app/interfaces/merchandise-response-interface';
 
 @Component({
   selector: 'app-merchandise-create',
   templateUrl: './merchandise-create.component.html',
-  styleUrls: ['./merchandise-create.component.css'],
 })
 export class MerchandiseCreateComponent implements OnInit {
   merchandiseForm!: FormGroup;
@@ -43,9 +42,10 @@ export class MerchandiseCreateComponent implements OnInit {
     });
   }
 
-
+  /** Tranforma el date para usarla en el filtro del calendario */
   today = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
+  /** Carga la lista de usuarios */
   loadUsers(): void {
     this.userService.getUsers().subscribe(
       (users: UserReponse[]) => {
@@ -57,11 +57,14 @@ export class MerchandiseCreateComponent implements OnInit {
     );
   }
 
+  /** Carga los datos de la mercancía si se está actualizando */
   loadMerchandiseData(): void {
     this.merchandiseService.getMerchandiseId(this.merchandiseId).subscribe(
       (merchandise: Content) => {
         this.merchandiseForm.patchValue(merchandise);
-        this.merchandiseForm.get('editedById')?.setValue(merchandise.editedBy?.id);
+        this.merchandiseForm
+          .get('editedById')
+          ?.setValue(merchandise.editedBy?.id);
         console.log(merchandise.editedBy?.name);
       },
       (error) => {
@@ -70,8 +73,7 @@ export class MerchandiseCreateComponent implements OnInit {
     );
   }
 
-
-
+  /** Inicializa el formulario de mercancía */
   initializeForm(): void {
     this.merchandiseForm = this.formBuilder.group({
       productName: ['', Validators.required],
@@ -82,11 +84,13 @@ export class MerchandiseCreateComponent implements OnInit {
     });
   }
 
+  /** Comprueba si un campo del formulario es inválido */
   isFieldInvalid(fieldName: string) {
     const field = this.merchandiseForm.get(fieldName);
     return field?.invalid && field?.touched;
   }
 
+  /** Envía el formulario de mercancía */
   onSubmit(): void {
     if (this.merchandiseForm.valid) {
       if (this.isUpdating) {
@@ -97,6 +101,7 @@ export class MerchandiseCreateComponent implements OnInit {
     }
   }
 
+  /** Actualiza la mercancía */
   updateMerchandise(): void {
     const merchandiseUp: MerchandiseEdit = this.merchandiseForm.value;
     merchandiseUp.id = this.merchandiseId;
@@ -115,44 +120,64 @@ export class MerchandiseCreateComponent implements OnInit {
       );
   }
 
+  /** Crea una nueva mercancía */
   createMerchandise(): void {
     const merchandiseData = this.merchandiseForm.value;
-    merchandiseData.productName = merchandiseData.productName
-      .trim()
-      .replace(/\s+/g, ' ');
-    const registeredByIdControl = this.merchandiseForm.get('registeredById');
-    if (registeredByIdControl) {
-      merchandiseData.registeredById = registeredByIdControl.value;
-    }
+    merchandiseData.productName = this.normalizeProductName(
+      merchandiseData.productName
+    );
+    const registeredById = this.merchandiseForm.get('registeredById')?.value;
 
     this.merchandiseService.createMerchandise(merchandiseData).subscribe(
       (response: any) => {
         if (response.id) {
-          this.showSnackBar('Merchandise created successfully');
-          this.navigateToMerchandiseList();
-        } else if (response.status === 'BAD_REQUEST') {
-          this.showSnackBar(
-            'The merchandise ' + merchandiseData.productName + ' already exists'
-          );
+          this.handleSuccessfulCreation(merchandiseData.productName);
         } else {
-          this.showSnackBar(response.message || 'Error creating merchandise');
+          this.handleCreationError(
+            response.message || 'Error creating merchandise'
+          );
         }
       },
       (error) => {
         if (
           error.error.message ===
-          'The merchandise ' + merchandiseData.productName + ' already exists'
+          `The merchandise ${merchandiseData.productName} already exists`
         ) {
-          this.showSnackBar(
-            'The merchandise ' + merchandiseData.productName + ' already exists'
-          );
+          this.handleMerchandiseAlreadyExists(merchandiseData.productName);
         } else {
-          this.showSnackBar('Error creating merchandise');
+          this.handleCreationError('Error creating merchandise');
         }
       }
     );
   }
 
+  /**
+   * Normaliza el nombre del producto eliminando espacios en blanco innecesarios.
+   *
+   * @param productName El nombre del producto a normalizar.
+   * @returns El nombre del producto normalizado.
+   */
+  private normalizeProductName(productName: string): string {
+    return productName.trim().replace(/\s+/g, ' ');
+  }
+
+  private handleSuccessfulCreation(productName: string): void {
+    this.showSnackBar('Merchandise created successfully');
+    this.navigateToMerchandiseList();
+  }
+
+  private handleCreationError(errorMessage: string): void {
+    this.showSnackBar(errorMessage);
+  }
+
+  private handleMerchandiseAlreadyExists(productName: string): void {
+    this.showSnackBar(`The merchandise ${productName} already exists`);
+  }
+
+  /**
+   * Crea la alerta que se mostrara en pantalla cuando se requiera
+   * @param message
+   */
   showSnackBar(message: string): void {
     this.snackBar.open(message, 'Close', {
       duration: 2000,

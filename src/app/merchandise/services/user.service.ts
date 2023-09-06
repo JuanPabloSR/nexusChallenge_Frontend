@@ -14,6 +14,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   *
+   * @returns Observable de tipo array de los usuarios
+   */
   getUsers(): Observable<UserReponse[]> {
     return this.http.get<UserReponse[]>(`${BASE_URl}/user`);
   }

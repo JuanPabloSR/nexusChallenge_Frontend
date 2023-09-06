@@ -5,18 +5,15 @@ import { EdBy } from 'src/app/interfaces/merchandise-response-interface';
 @Component({
   selector: 'app-dialog-delete',
   templateUrl: './dialog-delete.component.html',
-  styleUrls: ['./dialog-delete.component.css']
 })
 export class DialogDeleteComponent {
   users: EdBy[] = [];
   registeredBy: EdBy | null = null;
   selectedUser: number | null = null;
 
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DialogDeleteComponent>
-
   ) {
     this.users = data.users;
     this.registeredBy = data.registeredBy;
@@ -28,10 +25,7 @@ export class DialogDeleteComponent {
     this.dialogRef.close(true);
   }
 
-
   onCancel(): void {
     this.dialogRef.close(false);
   }
-
-
 }

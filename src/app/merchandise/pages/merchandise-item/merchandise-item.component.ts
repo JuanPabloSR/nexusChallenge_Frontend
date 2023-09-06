@@ -12,8 +12,7 @@ import { UserService } from '../../services/user.service';
   selector: 'app-merchandise-item',
   templateUrl: './merchandise-item.component.html',
   styleUrls: ['./merchandise-item.component.css'],
-  providers: [MatDialog]
-
+  providers: [MatDialog],
 })
 export class MerchandiseItemComponent implements OnInit {
   isLoading: boolean = false;
@@ -29,21 +28,22 @@ export class MerchandiseItemComponent implements OnInit {
     private userService: UserService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router,
-
-
-  ){}
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.merchandiseId = +params['id'];
       this.loadMerchandise();
     });
-    this.userService.getUsers().subscribe(users => {
+    this.userService.getUsers().subscribe((users) => {
       this.users = users;
     });
   }
 
+  /**
+   * Carga los detalles de la mercancía.
+   */
   loadMerchandise() {
     this.isLoading = true;
     this.merchandiseService.getMerchandiseId(this.merchandiseId).subscribe(
@@ -57,52 +57,65 @@ export class MerchandiseItemComponent implements OnInit {
           duration: 2000,
         });
       }
-    )
-  }
-
-  onConfirmDelete(): void {
-    this.merchandiseService.deleteMerchandise(this.merchandiseId, this.selectedUser!).subscribe(
-      () => {
-
-      },
-      (error) => {
-
-        if (error.status === 403) {
-          this.snackBar.open('You are not authorized to dispose of this merchandise', 'Cerrar', {
-            duration: 2000,
-          });
-        } else if(error.status === 404) {
-          this.snackBar.open('An error occurred while deleting the merchandise', 'Cerrar', {
-            duration: 2000,
-          });
-        } else {
-          this.snackBar.open('Merchandise was disposed of correctly', 'Cerrar', {
-            duration: 2000,
-          });
-          this.router.navigate(['/merchandise/list']);
-        }
-      }
     );
   }
 
+  /**
+   * Confirma la eliminación de la mercancía.
+   */
+  onConfirmDelete(): void {
+    this.merchandiseService
+      .deleteMerchandise(this.merchandiseId, this.selectedUser!)
+      .subscribe(
+        () => {},
+        (error) => {
+          if (error.status === 403) {
+            this.snackBar.open(
+              'You are not authorized to dispose of this merchandise',
+              'Cerrar',
+              {
+                duration: 2000,
+              }
+            );
+          } else if (error.status === 404) {
+            this.snackBar.open(
+              'An error occurred while deleting the merchandise',
+              'Cerrar',
+              {
+                duration: 2000,
+              }
+            );
+          } else {
+            this.snackBar.open(
+              'Merchandise was disposed of correctly',
+              'Cerrar',
+              {
+                duration: 2000,
+              }
+            );
+            this.router.navigate(['/merchandise/list']);
+          }
+        }
+      );
+  }
 
+  /**
+   * Abre el diálogo de confirmación de eliminación.
+   */
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
       data: {
         users: this.users,
         onConfirm: (selectedUser: number) => {
           this.selectedUser = selectedUser;
-        }
-      }
+        },
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.onConfirmDelete();
       }
     });
   }
-
-
-
 }

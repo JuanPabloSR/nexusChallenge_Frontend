@@ -70,9 +70,53 @@ app-footer {
   margin-top: auto;
 }
 
+.footer{
+  background-color: #ff5a19;
+  color: #000000;
+}
+
+
 .page-container {
   display: flex;
   flex-direction: column;
   min-height: 88vh;
+}
+
+
+/* Estilos de la toolbar */
+.toolbar-custom {
+  background-color: #00659e;
+  color: #ffffff;
+}
+
+
+.title-container {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.menu-button {
+  margin-right: 8px;
+}
+
+.logo {
+  width: 120px;
+}
+
+
+table {
+  width: 100%;
+}
+
+.table-container {
+  overflow-x: auto;
 }
 

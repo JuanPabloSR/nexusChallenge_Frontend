@@ -14,6 +14,12 @@ const BASE_URL = environment.URL_API;
 export class MerchandiseService {
   constructor(private http: HttpClient) {}
 
+  /**
+   * Obtiene la lista de mercancía aplicando filtros.
+   *
+   * @param filter Opciones de filtrado.
+   * @returns Observable con la respuesta de la lista de mercancía.
+   */
   getMerchandise(filter: FilterOptions): Observable<MerchandiseReponse> {
     const { size, page, keyword, entryDate } = filter;
     let params = new HttpParams()
@@ -26,14 +32,33 @@ export class MerchandiseService {
     return this.http.get(`${BASE_URL}/merchandise`, { params });
   }
 
+  /**
+   * Obtiene información de una mercancía específica por su ID.
+   *
+   * @param merchandiseId ID de la mercancía.
+   * @returns Observable con la información de la mercancía.
+   */
   getMerchandiseId(merchandiseId: number): Observable<any> {
     return this.http.get(`${BASE_URL}/merchandise/${merchandiseId}`);
   }
 
+  /**
+   * Crea una nueva mercancía.
+   *
+   * @param merchandiseData Datos de la mercancía a crear.
+   * @returns Observable con la respuesta de la creación.
+   */
   createMerchandise(merchandiseData: Content): Observable<any> {
     return this.http.post(`${BASE_URL}/merchandise`, merchandiseData);
   }
 
+ /**
+   * Actualiza una mercancía existente.
+   *
+   * @param merchandiseId ID de la mercancía a actualizar.
+   * @param merchandise Datos actualizados de la mercancía.
+   * @returns Observable con la respuesta de la actualización.
+   */
   updateMerchandise(
     merchandiseId: number,
     merchandise: MerchandiseEdit
@@ -41,6 +66,13 @@ export class MerchandiseService {
     return this.http.put(`${BASE_URL}/merchandise/${merchandiseId}`, merchandise);
   }
 
+  /**
+   * Elimina una mercancía por su ID y el ID del usuario que realiza la acción.
+   *
+   * @param merchandiseId ID de la mercancía a eliminar.
+   * @param userId ID del usuario que realiza la acción.
+   * @returns Observable con el estado de la eliminación (código de respuesta HTTP).
+   */
   deleteMerchandise(merchandiseId: number, userId: number): Observable<number> {
     const url = `${BASE_URL}/merchandise/${merchandiseId}`;
     const requestBody = { userId: userId };
