@@ -6,12 +6,12 @@
 }
 
 .card-custom:hover .container-custom {
-  background-color: #7cb342;
+  background-color: #ff5a19;
 }
 
 
 .user-icon-container img {
-  background-color: #7cb342;
+  background-color: #ff5a19;
   max-width: 200px;
   max-height: 200px;
   border-radius: 100%;
@@ -22,12 +22,7 @@
 
 }
 
-.card-custom:hover .user-icon-container img {
-  background-color: #323233;
-  transform: scale(1.05);
-}
-
-.custom-btn {
+.custom-btn, .custom-btn-edit, .custom-btn-delet  {
   width: 150px;
   margin: 0 auto;
   background-color: #ffffff !important;
@@ -35,9 +30,25 @@
 }
 
 .custom-btn:hover {
-  background-color: #7cb342 !important;
+  background-color: #ff5a19 !important;
   color: #ffffff !important;
 }
+
+.custom-btn-edit:hover {
+  background-color: #00659e !important;
+  color: #ffffff !important;
+}
+
+.custom-btn-delet:hover {
+  background-color: #d40808d8 !important;
+  color: #ffffff !important;
+}
+
+.card-custom:hover .user-icon-container img {
+  background-color: #323233;
+  transform: scale(1.05);
+}
+
 
 .card-body-custom{
   background-color: #3232333a;

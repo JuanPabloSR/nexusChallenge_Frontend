@@ -11,7 +11,6 @@ body {
 }
 
 
-
 /* Estilos error 404 */
 .not-found-container {
   text-align: center;
@@ -47,45 +46,39 @@ body {
 }
 
 .button-custom:hover {
-  background-color: #7cb342 !important;
+  background-color: #ff5a19 !important;
   color: #ffffff !important;
 }
 
 
-
 .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: #7cb342 !important;
+  --mdc-circular-progress-active-indicator-color: #ff5a19 !important;
 }
 
 .mat-mdc-snack-bar-container {
   &.snackbar-custom {
     --mdc-snackbar-container-color: #323233;
     --mat-snack-bar-button-color: #fafafa;
-    --mdc-snackbar-supporting-text-color: #7cb342;
+    --mdc-snackbar-supporting-text-color: #ff5a19 !important;
   }
 }
 
-
-app-footer {
-  margin-top: auto;
-}
 
 .footer{
   background-color: #ff5a19;
   color: #000000;
 }
 
-
 .page-container {
   display: flex;
   flex-direction: column;
-  min-height: 88vh;
+  min-height: 93.5vh;
 }
 
 
 /* Estilos de la toolbar */
 .toolbar-custom {
-  background-color: #00659e;
+  background-color: #00659e !important;
   color: #ffffff;
 }
 
@@ -110,7 +103,6 @@ app-footer {
 .logo {
   width: 120px;
 }
-
 
 table {
   width: 100%;

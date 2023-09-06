@@ -54,6 +54,7 @@ export class MerchandiseItemComponent implements OnInit {
       (error) => {
         this.errorRequest = 'Error Request merchandise not exist';
         this.snackBar.open(this.errorRequest, 'Close', {
+          panelClass: ['snackbar-custom'],
           duration: 2000,
         });
       }
@@ -74,6 +75,7 @@ export class MerchandiseItemComponent implements OnInit {
               'You are not authorized to dispose of this merchandise',
               'Cerrar',
               {
+                panelClass: ['snackbar-custom'],
                 duration: 2000,
               }
             );
@@ -82,6 +84,7 @@ export class MerchandiseItemComponent implements OnInit {
               'An error occurred while deleting the merchandise',
               'Cerrar',
               {
+                panelClass: ['snackbar-custom'],
                 duration: 2000,
               }
             );
@@ -90,6 +93,7 @@ export class MerchandiseItemComponent implements OnInit {
               'Merchandise was disposed of correctly',
               'Cerrar',
               {
+                panelClass: ['snackbar-custom'],
                 duration: 2000,
               }
             );

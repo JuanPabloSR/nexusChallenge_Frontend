@@ -52,7 +52,10 @@ export class MerchandiseCreateComponent implements OnInit {
         this.users = users;
       },
       (error) => {
-        console.log('Error retrieving users:', error);
+        this.snackBar.open('Error retrieving users', 'Close', {
+          panelClass: ['snackbar-custom'],
+          duration: 2000,
+        });
       }
     );
   }
@@ -65,10 +68,12 @@ export class MerchandiseCreateComponent implements OnInit {
         this.merchandiseForm
           .get('editedById')
           ?.setValue(merchandise.editedBy?.id);
-        console.log(merchandise.editedBy?.name);
       },
       (error) => {
-        console.log('Error retrieving merchandise:', error);
+        this.snackBar.open('Error retrieving merchandise', 'Close', {
+          panelClass: ['snackbar-custom'],
+          duration: 2000,
+        });
       }
     );
   }
@@ -180,6 +185,7 @@ export class MerchandiseCreateComponent implements OnInit {
    */
   showSnackBar(message: string): void {
     this.snackBar.open(message, 'Close', {
+      panelClass: ['snackbar-custom'],
       duration: 2000,
     });
   }

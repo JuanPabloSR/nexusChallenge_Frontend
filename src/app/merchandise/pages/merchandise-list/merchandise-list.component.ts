@@ -96,6 +96,7 @@ export class MerchandiseListComponent implements AfterViewInit, OnInit {
         this.merchandiseDataSource.data = [];
         this.errorRequest = 'Error in the search';
         this.snackBar.open(this.errorRequest, 'Close', {
+          panelClass: ['snackbar-custom'],
           duration: 2000,
         });
       }

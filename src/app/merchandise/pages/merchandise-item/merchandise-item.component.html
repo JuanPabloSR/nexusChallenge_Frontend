@@ -54,32 +54,31 @@
 
           <div class="mt-5">
             <button
-              class="custom-btn"
+              class="custom-btn-edit m-2"
               mat-raised-button
-              color="primary"
               routerLink="/merchandise/edit/{{ merchandise.id }}"
-              class="m-2"
             >
+              <mat-icon> mode_edit </mat-icon>
               Edit
             </button>
 
             <button
-              class="custom-btn"
+              class="custom-btn-delet m-2"
               mat-raised-button
               color="primary"
               (click)="openDeleteDialog()"
-              class="m-2"
             >
+              <mat-icon> delete </mat-icon>
               Delete
             </button>
-            <br>
+            <br />
             <button
-              class="custom-btn"
+              class="custom-btn m-2"
               mat-raised-button
               color="primary"
               routerLink="/merchandise/list"
-              class="m-2"
             >
+              <mat-icon>arrow_back_ios</mat-icon>
               Back
             </button>
           </div>
@@ -101,7 +100,7 @@
       </button>
     </div>
   </div>
+  <div>
+    <app-footer></app-footer>
+  </div>
 </body>
-<div>
-  <app-footer></app-footer>
-</div>

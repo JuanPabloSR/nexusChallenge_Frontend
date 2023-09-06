@@ -1,6 +1,6 @@
 <mat-toolbar class="toolbar-custom">
   <div class="title-container">
-    <img src="assets/nexus.png" alt="logo" class="logo">
+    <img src="assets/nexus.png" alt="logo" class="logo" />
   </div>
 
   <div class="spacer"></div>
@@ -12,14 +12,17 @@
       *ngIf="showBackButton"
       routerLink="/merchandise/list"
     >
-      <mat-icon> supervisor_account </mat-icon>
+      <mat-icon> format_list_bulleted </mat-icon>
       Merchandise List
     </button>
 
-    <button class="m-2" mat-button routerLink="/merchandise/create">
-      <mat-icon> supervisor_account </mat-icon> Create Merchandise
+    <button
+      class="m-2 button-custom"
+      mat-button
+      routerLink="/merchandise/create"
+    >
+      <mat-icon> view_in_ar </mat-icon> Create Merchandise
     </button>
-
   </ng-container>
 
   <ng-template
@@ -31,14 +34,19 @@
 <ng-template #menuTemplate>
   <mat-menu #menu="matMenu">
     <button mat-menu-item *ngIf="showBackButton" routerLink="/subscribers/list">
-      <mat-icon> supervisor_account </mat-icon>Merchandise List
+      <mat-icon> format_list_bulleted </mat-icon>Merchandise List
     </button>
     <button mat-menu-item routerLink="/merchandise/create">
-      <mat-icon> supervisor_account </mat-icon>Create Merchandise
+      <mat-icon> view_in_ar </mat-icon>Create Merchandise
     </button>
   </mat-menu>
 
-  <button mat-icon-button [matMenuTriggerFor]="menu" class="button-custom" *ngIf="isSmallScreen">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    class="button-custom"
+    *ngIf="isSmallScreen"
+  >
     <mat-icon>menu</mat-icon>
   </button>
 </ng-template>
