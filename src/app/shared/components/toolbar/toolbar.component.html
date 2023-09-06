@@ -1,1 +1,44 @@
-<p>toolbar works!</p>
+<mat-toolbar class="toolbar-custom">
+  <div class="title-container">
+    <img src="assets/nexus.png" alt="logo" class="logo">
+  </div>
+
+  <div class="spacer"></div>
+
+  <ng-container *ngIf="!isSmallScreen">
+    <button
+      class="m-2 button-custom"
+      mat-button
+      *ngIf="showBackButton"
+      routerLink="/merchandise/list"
+    >
+      <mat-icon> supervisor_account </mat-icon>
+      Merchandise List
+    </button>
+
+    <button class="m-2" mat-button routerLink="/merchandise/create">
+      <mat-icon> supervisor_account </mat-icon> Create Merchandise
+    </button>
+
+  </ng-container>
+
+  <ng-template
+    [ngTemplateOutlet]="menuTemplate"
+    *ngIf="isSmallScreen"
+  ></ng-template>
+</mat-toolbar>
+
+<ng-template #menuTemplate>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngIf="showBackButton" routerLink="/subscribers/list">
+      <mat-icon> supervisor_account </mat-icon>Merchandise List
+    </button>
+    <button mat-menu-item routerLink="/merchandise/create">
+      <mat-icon> supervisor_account </mat-icon>Create Merchandise
+    </button>
+  </mat-menu>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="button-custom" *ngIf="isSmallScreen">
+    <mat-icon>menu</mat-icon>
+  </button>
+</ng-template>

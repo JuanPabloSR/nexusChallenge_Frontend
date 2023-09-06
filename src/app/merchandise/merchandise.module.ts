@@ -7,20 +7,25 @@ import { MerchandiseItemComponent } from './pages/merchandise-item/merchandise-i
 import { MerchandiseListComponent } from './pages/merchandise-list/merchandise-list.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToolbarComponent } from '../shared/components/toolbar/toolbar.component';
+import { FooterComponent } from '../shared/components/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     MerchandiseCreateComponent,
     MerchandiseItemComponent,
-    MerchandiseListComponent
+    MerchandiseListComponent,
+    ToolbarComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MerchandiseRoutingModule
+    MerchandiseRoutingModule,
+
   ],
   providers: [DatePipe]
 })
