@@ -85,7 +85,7 @@ export class MerchandiseCreateComponent implements OnInit {
       quantity: ['', Validators.required],
       entryDate: ['', Validators.required],
       registeredById: [null, this.isUpdating ? null : Validators.required],
-      editedById: [null],
+      editedById: [null, this.isUpdating ? Validators.required : null],
     });
   }
 
